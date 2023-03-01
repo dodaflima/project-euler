@@ -10,3 +10,9 @@ Se listarmos todos os números naturais abaixo de 10 que são multiplos de 3 OU 
 A soma desses números é 23.
 Ache a soma de todos os multiplos de 3 ou 5 abaixo de 1000.
 '''
+
+# Cria um generator com número que sejam multiplos de 3 ou 5
+exp = (x for x in range(1000) if x % 3 == 0 or x % 5 == 0)
+
+# Printa a soma de todos os números
+print(sum(exp))
