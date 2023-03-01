@@ -14,3 +14,20 @@ Começando por 1 e 2, os primeiros 10 elementos serão
 Considerando os elementos da sequência de Fibonacci que não ultrapassem 4 milhões,
 encontre a soma dos elementos de valor par
 '''
+
+UNTIL = 4000000
+is_even = lambda x: True if x % 2 == 0 else False
+
+def fib_until_value(max_value: int):
+    a = 1
+    b = 1
+    while a <= max_value:
+        yield a
+        a, b = b, a+b
+
+fib_list = fib_until_value(UNTIL)
+
+even_list = list(filter(is_even, fib_list))
+
+# result
+print(sum(even_list))
