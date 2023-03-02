@@ -20,3 +20,9 @@ A diferença entre o quadrado da soma e a soma dos quadrados é
 Encontre a diferença entre a soma dos quadrados e o quadrado da soma dos primeiros cem números naturais
 """
 
+number_list = list((x+1) for x in range(100))
+sum_square = sum(x**2 for x in number_list)
+square_sum = (sum(number_list))**2
+
+result = square_sum - sum_square
+print(result)
