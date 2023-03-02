@@ -1,1 +1,25 @@
 find_primes.py
+
+
+def find_primes_until(number):
+    primes = [2]
+    init = 3
+
+    while init <= number:
+        tries = []
+
+        for prime in primes:
+            if init % prime == 0:
+                tries.clear()
+                break
+            else:
+                tries.append(False)
+        if not any(tries) and len(tries) == len(primes):
+            primes.append(init)
+        init += 2
+
+    return primes
+    
+number = find_primes_until(2000000)
+
+print(sum(number))
