@@ -8,3 +8,8 @@ What is the sum of the digits of the number 21000?
 2¹⁵ = 32768 e a soma dos digitos é 3 + 2 + 7 + 6 + 8 = 26.
 Qual é a soma dos digitos do número 2¹⁰⁰⁰
 """
+
+numbers = [int(x) for x in str(2**1000)]
+
+# Answer
+print(sum(numbers))
