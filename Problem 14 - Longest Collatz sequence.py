@@ -22,3 +22,38 @@ Apesar de ainda não ser provado (Problema de Collatz), pensasse que todos os n�
 Qual número inicial, abaixo de um milhão, produz a maior sequência?
 NOTA: Uma vez que a sequência inicie os termos podem ser maiores que um milhão
 """
+
+is_even = lambda x: x % 2 == 0
+if_even = lambda x: int(x / 2)
+if_odd = lambda x: int((3 * x) + 1)
+
+def collatz(n):
+    while n > 1:
+        if is_even(n):
+            n = if_even(n)
+            yield n
+        else:
+            n = if_odd(n)
+            yield n
+
+def answer(number_try):
+    answer_number = 0
+    answer_number_list = []
+    try_number_list = []
+
+    while number_try > 1:
+
+        for i in collatz(number_try):
+            try_number_list.append(i)
+
+        if len(try_number_list) > len(answer_number_list):
+            answer_number = number_try
+            answer_number_list = try_number_list.copy()
+
+        try_number_list.clear()
+        number_try -= 1
+
+    return answer_number
+
+# Answer
+print(answer(1000000))
