@@ -12,3 +12,18 @@ e somente sendo capaz de se mover para direita e para baixo,
 há exatamente 6 caminhos para o canto inferior direito.
 Quantos caminhos possiveis há em uma grade 20x20?
 '''
+
+from math import prod
+
+def fat(number):
+    number = abs(number)
+    numbers = []
+    while number > 0:
+        numbers.append(number)
+        number -= 1
+    return prod(numbers)
+
+answer = lambda x, y: int(fat(x+y) / (fat(x) * fat(y)))
+
+# Answer
+print(answer(20, 20))
