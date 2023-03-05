@@ -38,3 +38,16 @@ F12 = 144
 O 12° termo, F12, é o primeiro termo a conter 3 digitos.
 Qual é o index do primeiro termo na sequência de Fibonacci a conter 1000 digitos?
 '''
+
+one_thousand_digits = lambda x: len(str(x)) == 1000
+
+def answer():
+    fib_list = [1, 1]
+    while not one_thousand_digits(fib_list[-1]):
+        fib_list.append(sum([fib_list[-1], fib_list[-2]]))
+    
+    return fib_list.index(fib_list[-1]) + 1
+
+# Answer
+print(answer())
+        
