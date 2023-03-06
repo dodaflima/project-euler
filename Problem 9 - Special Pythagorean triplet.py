@@ -32,8 +32,6 @@ for triplet in pythagorean_list:
         if soma == 1000:
             answer = [x, y, z]
             break
-        if soma > 1000:
-            break
     if len(answer) != 0:
         break
 

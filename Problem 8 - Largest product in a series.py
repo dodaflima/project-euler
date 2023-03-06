@@ -38,7 +38,6 @@ numbers = "731671765313306249192251196744265747423553491949349698352031277450632
 remove_first_char = lambda x: x[1:]
 get_adjacent_numbers = lambda x, y: x[:y]
 parse_each_to_int = lambda x: [int(y) for y in x]
-get_prod = lambda x: prod(x)
 
 greatest_product = 0
 
