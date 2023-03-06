@@ -56,3 +56,40 @@ NOTA: Como há apenas 16384 rotas, é possível resolver este problema tentando 
 No entanto, o problema 67, é o mesmo desafio com um triângulo contendo cem linhas;
 Não pode ser resolvido por força bruta, e necessita um método inteligente! ;o)
 '''
+
+array = [
+    [75],
+    [95, 64],
+    [17, 47, 82],
+    [18, 35, 87, 10],
+    [20,  4, 82, 47, 65],
+    [19,  1, 23, 75,  3, 34],
+    [88,  2, 77, 73,  7, 63, 67],
+    [99, 65,  4, 28,  6, 16, 70, 92],
+    [41, 41, 26, 56, 83, 40, 80, 70, 33],
+    [41, 48, 72, 33, 47, 32, 37, 16, 94, 29],
+    [53, 71, 44, 65, 25, 43, 91, 52, 97, 51, 14],
+    [70, 11, 33, 28, 77, 73, 17, 78, 39, 68, 17, 57],
+    [91, 71, 52, 38, 17, 14, 91, 43, 58, 50, 27, 29, 48],
+    [63, 66,  4, 68, 89, 53, 67, 30, 73, 16, 69, 87, 40, 31],
+    [ 4, 62, 98, 27, 23,  9, 70, 98, 73, 93, 38, 53, 60,  4, 23]
+]
+
+def sum_max_to_up(up_list, below_list):
+    for index, _ in enumerate(up_list):
+        up_list[index] += max([below_list[index], below_list[index + 1]])
+    return up_list
+
+def answer(array):
+    index_to_check = len(array) - 1
+
+    while index_to_check > 0:
+        up_list = array[index_to_check - 1]
+        below_list = array[index_to_check]
+        up_list = sum_max_to_up(up_list, below_list)
+        index_to_check -= 1
+
+    return array[0][0]
+
+# Answer
+print(answer(array))
