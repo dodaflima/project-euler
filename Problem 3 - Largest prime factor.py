@@ -9,10 +9,6 @@ Os fatores primos de 13195 são 5, 7, 13, e 29.
 Qual é o maior fator primo do número 600851475143?
 '''
 
-number = 600851475143
-largest_prime_factor = 0
-has_remainder = lambda number, div: number % div != 0
-factor_list = []
 primes = [
     2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79,
     83, 89, 97, 101, 103, 107, 109, 113, 127, 131, 137, 139, 149, 151, 157, 163, 167, 173,
@@ -77,14 +73,22 @@ primes = [
     6803, 6823, 6827, 6829, 6833, 6841, 6857
 ]
 
-while number != 1:
-    prime = primes[0]
-    if not has_remainder(number, prime):
-        factor_list.append(prime)
-        number /= prime
-    else:
-        primes.pop(0)
+def get_largest_prime_factor(number, prime_list: list[int]) -> int:
+    largest_prime_factor: int = 0
+    has_remainder: bool = lambda number, div: number % div != 0
+    factor_list: list = []
+    
+    while number != 1:
+        prime: int = prime_list[0]
+        
+        if not has_remainder(number, prime):
+            factor_list.append(prime)
+            largest_prime_factor = prime
+            number /= prime
+        else:
+            prime_list.pop(0)
+            
+    return largest_prime_factor
 
 # Answer
-print(max(factor_list))
-
+print(get_largest_prime_factor(600851475143, primes))

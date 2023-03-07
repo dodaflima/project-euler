@@ -17,6 +17,7 @@ def find_primes(number):
         tries = []
 
         if init == 2:
+            yield init
             init += 1
             continue
 
@@ -26,13 +27,16 @@ def find_primes(number):
                 break
             else:
                 tries.append(False)
-        if not any(tries) and len(tries) == len(primes):
+                
+        if len(tries) == len(primes):
             primes.append(init)
-        init += 1
+            init += 1
+            yield primes[-1]
 
-    return primes
+        else:
+            init += 1
 
 the_primes = find_primes(10001)
 
 # Answer
-print(the_primes[-1])
+print(list(the_primes)[-1])

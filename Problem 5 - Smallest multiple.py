@@ -11,6 +11,8 @@ Qual é o menor número positivo que é divisivel por todos os números entre 1 
 
 from math import prod
 
+number_list = [x+1 for x in range(20)]
+
 # Function to find prime numbers
 def find_primes_until(number):
     primes = [2]
@@ -18,8 +20,9 @@ def find_primes_until(number):
 
     while init <= number:
         tries = []
-
+        
         if init == 2:
+            yield init
             init += 1
             continue
 
@@ -28,36 +31,45 @@ def find_primes_until(number):
                 tries.clear()
                 break
             else:
-                tries.append(False)
-        if not any(tries) and len(tries) == len(primes):
+                tries.append(True)
+
+        if len(tries) == len(primes):
             primes.append(init)
-        init += 1
+            init += 1
+            yield primes[-1]
 
-    return primes
+        else:
+            init += 1
 
-has_remainder = lambda number, div: number % div != 0
-remove_number_one = lambda array: [x for x in array if x != 1]
-number_list = [x+1 for x in range(20)]
-primes_until_max = find_primes_until(20)
-prod_list = []
+def get_divisors_number(number_list: list[int]) -> list[int]:
+    primes_until_max = max(number_list) + 1 
+    primes_list = list(find_primes_until(primes_until_max))
+    has_remainder = lambda number, div: number % div != 0
+    remove_number_one = lambda array: [x for x in array if x != 1]
 
-while len(primes_until_max) != 0:
-    remove_number_one(number_list)
-    can_add = False
+    while len(primes_list) != 0:
+        remove_number_one(number_list)
+        can_add = False
+        can_pop_prime = []
 
-    if len(primes_until_max) > 0:
-        prime = primes_until_max[0]
-        
-    for index, value in enumerate(number_list):
-        if not has_remainder(value, prime):
-            number_list[index] = value / prime
-            can_add = True
+        if len(primes_list) > 0:
+            prime = primes_list[0]
 
-    if can_add:
-        prod_list.append(prime)
+        for index, value in enumerate(number_list):
+            if not has_remainder(value, prime):
+                number_list[index] = value / prime
+                can_add = True
+                
+            else:
+                can_pop_prime.append(True)
 
-    if number_list.count(primes_until_max[0]) == 0:
-        primes_until_max.pop(0)
+        if len(can_pop_prime) == len(number_list):
+            primes_list.pop(0)
+
+        if can_add:
+            yield prime
+
 
 # Answer
-print(prod(prod_list))
+numbers = list(get_divisors_number(number_list))
+print(prod(numbers))

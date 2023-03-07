@@ -11,26 +11,32 @@ O maior palíndromo obtido com o produto de dois número de 2 dígitos é 9009 =
 Encontre o maior palíndromo feito a partir do produto de dois números de 3 dígitos
 """
 
-check_is_palindrome = lambda x: True if str(x)[::-1] == str(x) else False
+def get_largest_palin_between(first_num_size_limit: int, second_num_size_limit: int) -> int:
 
-def get_largest_palin_between(x: int, y: int) -> int:
     palindrome: int = 0
-    a = 4
-    b = 4
-    while a < x:
-        while b < y:
-            palin = a * b
-            if check_is_palindrome(palin) \
-                and len(str(a)) == 3 \
-                and len(str(b)) == 3 \
-                and palin > palindrome:
+    first_number: int = 0
+    second_number: int = 0
+    check_is_palindrome: bool = lambda x: True if str(x)[::-1] == str(x) else False
 
+    while first_number <= first_num_size_limit:
+
+        while second_number <= second_num_size_limit:
+
+            palin = first_number * second_number
+
+            cond_one: bool = check_is_palindrome(palin)
+            cond_two: bool = palin > palindrome
+
+            if cond_one and cond_two:
                 palindrome = palin
-            b += 1
-        a += 1
-        b = 4
+
+            second_number += 1
+
+        first_number += 1
+        second_number = 0
+
     return palindrome
 
 # Get the result
-answer = get_largest_palin_between(1000, 1000)
+answer: int = get_largest_palin_between(1000, 1000)
 print(answer)

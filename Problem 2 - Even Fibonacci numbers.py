@@ -16,14 +16,15 @@ encontre a soma dos elementos de valor par
 '''
 
 UNTIL = 4000000
-is_even = lambda x: True if x % 2 == 0 else False
+is_even: bool = lambda x: True if x % 2 == 0 else False
 
 def fib_until_value(max_value: int):
-    a = 1
-    b = 1
-    while a <= max_value:
-        yield a
-        a, b = b, a+b
+    number_one = 1
+    number_two = 1
+    
+    while number_one <= max_value:
+        yield number_one
+        number_one, number_two = number_two, number_one+number_two
 
 fib_list = fib_until_value(UNTIL)
 
